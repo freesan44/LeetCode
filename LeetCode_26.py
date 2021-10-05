@@ -1,24 +1,16 @@
 class Solution:
     def removeDuplicates(self, nums:[int]) -> int:
-        lenDup = len(set(nums))#去重后的长度
-        if len(nums) == 1: return 1
-        i = 0
-        while i < lenDup-1:
-            print(nums[i])
-            if nums[i] == nums[i+1]:
-                temp = nums[i]
-                print(nums[i+1:])
-                # nums[i:-1] = nums[i+1:]
-                nums[i+1: len(nums)-1] = nums[i+2:]
-                nums[-1] = temp
+        # 双指针方法
+        left, right = 0, 0
+        while right < len(nums):
+            if nums[left] == nums[right]:
+                right += 1
             else:
-                i += 1
-        nums = nums[:lenDup]
-        return len(nums)
-
-
-
-
+                nums[left+1] = nums[right]
+                right += 1
+                left += 1
+            # print(nums)
+        return left+1
 
 if __name__ == '__main__':
     nums = [0,0,1,1,1,2,2,3,3,4]
